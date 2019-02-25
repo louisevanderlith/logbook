@@ -4,9 +4,9 @@ import (
 	"log"
 
 	"github.com/astaxie/beego"
-	"github.com/louisevanderlith/mango/app/logbook/routers"
-	"github.com/louisevanderlith/mango/pkg"
-	"github.com/louisevanderlith/mango/pkg/enums"
+	"github.com/louisevanderlith/logbook/routers"
+	"github.com/louisevanderlith/mango"
+	"github.com/louisevanderlith/mango/enums"
 )
 
 func main() {
