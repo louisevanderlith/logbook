@@ -2,19 +2,19 @@ package routers
 
 import (
 	"github.com/astaxie/beego"
-	"github.com/louisevanderlith/mango/app/logbook/controllers"
-	"github.com/louisevanderlith/mango/pkg"
-	"github.com/louisevanderlith/mango/pkg/control"
-	"github.com/louisevanderlith/mango/pkg/enums"
+	"github.com/louisevanderlith/logbook/controllers"
+	"github.com/louisevanderlith/mango"
+	"github.com/louisevanderlith/mango/control"
+	"github.com/louisevanderlith/mango/enums"
 )
 
-func Setup(s *util.Service) {
+func Setup(s *mango.Service) {
 	ctrlmap := EnableFilter(s)
 
 	beego.Router("/", controllers.NewDefaultCtrl(ctrlmap))
 }
 
-func EnableFilter(s *util.Service) *control.ControllerMap {
+func EnableFilter(s *mango.Service) *control.ControllerMap {
 	ctrlmap := control.CreateControlMap(s)
 
 	emptyMap := make(control.ActionMap)
