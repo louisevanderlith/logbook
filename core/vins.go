@@ -1,3 +1,3 @@
-package book
+package core
 
 type VINs []*VIN

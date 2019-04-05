@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/astaxie/beego"
+	"github.com/louisevanderlith/logbook/core"
 	"github.com/louisevanderlith/logbook/routers"
 	"github.com/louisevanderlith/mango"
 	"github.com/louisevanderlith/mango/enums"
@@ -13,6 +14,9 @@ import (
 func main() {
 	mode := os.Getenv("RUNMODE")
 	appName := beego.BConfig.AppName
+
+	core.CreateContext()
+	defer core.Shutdown()
 
 	// Register with router
 	srv := mango.NewService(mode, appName, enums.APP)
@@ -28,7 +32,6 @@ func main() {
 		if err != nil {
 			panic(err)
 		}
-		
 		routers.Setup(srv)
 
 		beego.SetStaticPath("/dist", "dist")

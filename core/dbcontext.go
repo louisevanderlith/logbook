@@ -1,19 +1,36 @@
-package book
+package core
+
+import (
+	"github.com/louisevanderlith/husk"
+)
 
 type context struct {
-	Vehicles     vehiclesTable
-	VINS         vinsTable
-	Services     servicesTable
-	ServiceItems serviceItemsTable
+	Vehicles     husk.Tabler
+	VINS         husk.Tabler
+	Services     husk.Tabler
+	ServiceItems husk.Tabler
 }
 
 var ctx context
 
-func init() {
+func CreateContext() {
+	defer seed()
+
 	ctx = context{
-		Vehicles:     NewVehiclesTable(),
-		VINS:         NewVINSTable(),
-		Services:     NewServicesTable(),
-		ServiceItems: NewServiceItemsTable(),
+		Vehicles:     husk.NewTable(new(Vehicle)),
+		VINS:         husk.NewTable(new(VIN)),
+		Services:     husk.NewTable(new(Service)),
+		ServiceItems: husk.NewTable(new(ServiceItem)),
 	}
+}
+
+func Shutdown() {
+	ctx.Vehicles.Save()
+	ctx.VINS.Save()
+	ctx.Services.Save()
+	ctx.ServiceItems.Save()
+}
+
+func seed() {
+
 }
