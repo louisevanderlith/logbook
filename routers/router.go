@@ -12,7 +12,7 @@ import (
 func Setup(s *mango.Service) {
 	ctrlmap := EnableFilter(s)
 
-	beego.Router("/", controllers.NewDefaultCtrl(ctrlmap))
+	beego.Router("/v1/", controllers.NewDefaultCtrl(ctrlmap))
 }
 
 func EnableFilter(s *mango.Service) *control.ControllerMap {
@@ -20,6 +20,8 @@ func EnableFilter(s *mango.Service) *control.ControllerMap {
 
 	emptyMap := make(secure.ActionMap)
 	emptyMap["GET"] = roletype.User
+	emptyMap["POST"] = roletype.Owner
+	emptyMap["PUT"] = roletype.Owner
 
 	ctrlmap.Add("/", emptyMap)
 
