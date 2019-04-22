@@ -32,6 +32,8 @@ github.com/louisevanderlith/husk v0.1.1 h1:OJZ4BFSsGjFkSrkI4yYc2BgGkklB/gs0Iz+wH
 github.com/louisevanderlith/husk v0.1.1/go.mod h1:FiREVNZW48kA++iCekTEqFLcpe1m31+FQhd1ePm0YLA=
 github.com/louisevanderlith/husk v0.6.21 h1:FaQCIlsbGH3B2QVHgS6TrJxEr7xeMYTcpiLMAUwBIhQ=
 github.com/louisevanderlith/husk v0.6.21/go.mod h1:FiREVNZW48kA++iCekTEqFLcpe1m31+FQhd1ePm0YLA=
+github.com/louisevanderlith/husk v0.6.23 h1:Hw/K4UGoZbwfVb+w3LHXcRBUS2Mg+hvestydig+jqAU=
+github.com/louisevanderlith/husk v0.6.23/go.mod h1:FiREVNZW48kA++iCekTEqFLcpe1m31+FQhd1ePm0YLA=
 github.com/louisevanderlith/mango v0.1.12 h1:n0vd6QsplIGf7UxhPHwwZYZOrg8KS8Sa68r/GkQwls8=
 github.com/louisevanderlith/mango v0.1.12/go.mod h1:HgTP32VLyeos6GZCfMnPMWT9OcYe313qmL7ZUgfwSFQ=
 github.com/louisevanderlith/mango v0.2.21 h1:MHQRyb3eFzK1qKZqEQhl3msel5o+ZdFYq2X/X7vcpdA=
@@ -44,6 +46,8 @@ github.com/louisevanderlith/mango v0.3.1 h1:ZaDYkr859Pykhv/eCuF8Hc3qyGvQYIBaMrqu
 github.com/louisevanderlith/mango v0.3.1/go.mod h1:FaXJhL2RYtrqL1ygoRUJU6tUvQzr8S331mK5lE1t9P4=
 github.com/louisevanderlith/mango v0.3.13 h1:Ust6D/7mequ53gWxuQBW0TN4OnGV/J642BHJFHrw6cc=
 github.com/louisevanderlith/mango v0.3.13/go.mod h1:08ZlxthQJDm3NWla/QIJ9Ja/LLNw/dbSLke6vmQ75FM=
+github.com/louisevanderlith/mango v0.3.15 h1:YqtwCu9za8s0eRW1NkBoM4ltWSV+xezSGyWmLX++0M8=
+github.com/louisevanderlith/mango v0.3.15/go.mod h1:08ZlxthQJDm3NWla/QIJ9Ja/LLNw/dbSLke6vmQ75FM=
 github.com/louisevanderlith/secure v0.0.0-20190405144636-b7fb199bb689/go.mod h1:r8RUEvDA4onIU4FxTbJNVcszOquBhE7EgVA6iq7Ln98=
 github.com/louisevanderlith/secure v0.1.0 h1:y2hvNg0l3e6y3TJpj5Db+Bvrp5OCHLBTrtCGlgHD72U=
 github.com/louisevanderlith/secure v0.1.0/go.mod h1:M0cpImwBIehj7GqvN6WC1z3kiv98mjTiwngopuVvKHY=
