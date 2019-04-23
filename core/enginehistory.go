@@ -9,7 +9,7 @@ import (
 type EngineHistory struct {
 	SwapDate time.Time
 	SerialNo string
-	Engine   *Engine
+	//Engine   *Engine
 }
 
 func (m EngineHistory) Valid() (bool, error) {
