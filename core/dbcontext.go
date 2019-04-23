@@ -11,8 +11,6 @@ type context struct {
 var ctx context
 
 func CreateContext() {
-	defer seed()
-
 	ctx = context{
 		History: husk.NewTable(new(History)),
 	}

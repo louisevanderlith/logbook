@@ -13,5 +13,5 @@
 
 logbook
 
-node_modules
-dist
+db/
+!db/*.seed.json
