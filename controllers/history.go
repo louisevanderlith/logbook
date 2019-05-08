@@ -1,6 +1,9 @@
 package controllers
 
 import (
+	"encoding/json"
+	"net/http"
+
 	"github.com/louisevanderlith/husk"
 	"github.com/louisevanderlith/logbook/core"
 	"github.com/louisevanderlith/mango/control"
@@ -24,13 +27,35 @@ func (req *HistoryController) GetByVehicle() {
 	key, err := husk.ParseKey(vehKey)
 
 	if err != nil {
-		req.Serve(nil, err)
+		req.Serve(http.StatusBadRequest, err, nil)
 		return
 	}
 
-	req.Serve(core.GetHistoryByVehicle(vehKey))
+	rec, err := core.GetHistoryByVehicle(key)
+
+	if err != nil {
+		req.Serve(http.StatusNotFound, err, nil)
+		return
+	}
+
+	req.Serve(http.StatusOK, nil, rec)
 }
 
+// /v1/history
 func (req *HistoryController) Post() {
-	
+	var obj core.History
+	err := json.Unmarshal(req.Ctx.Input.RequestBody, &obj)
+
+	if err != nil {
+		req.Serve(http.StatusBadRequest, err, nil)
+		return
+	}
+
+	rec, err := obj.Create()
+
+	if err != nil {
+		req.Serve(http.StatusInternalServerError, err, nil)
+	}
+
+	req.Serve(http.StatusOK, nil, rec)
 }

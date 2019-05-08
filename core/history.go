@@ -19,3 +19,15 @@ func (p History) Valid() (bool, error) {
 func GetHistoryByVehicle(vehicleKey husk.Key) (husk.Recorder, error) {
 	return ctx.History.FindFirst(byVehicleKey(vehicleKey))
 }
+
+func (p History) Create() (husk.Recorder, error) {
+	rec := ctx.History.Create(p)
+
+	if rec.Error != nil {
+		return nil, rec.Error
+	}
+
+	ctx.History.Save()
+
+	return rec.Record, nil
+}
