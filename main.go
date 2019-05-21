@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"os"
+	"path"
 
 	"github.com/astaxie/beego"
 	"github.com/louisevanderlith/logbook/core"
@@ -13,7 +14,10 @@ import (
 
 func main() {
 	mode := os.Getenv("RUNMODE")
-	pubPath := os.Getenv("KEYPATH")
+	keyPath := os.Getenv("KEYPATH")
+	pubName := os.Getenv("PUBLICKEY")
+	host := os.Getenv("HOST")
+	pubPath := path.Join(keyPath, pubName)
 
 	appName := beego.BConfig.AppName
 
@@ -29,7 +33,7 @@ func main() {
 	if err != nil {
 		log.Print("Register: ", err)
 	} else {
-		routers.Setup(srv)
+		routers.Setup(srv, host)
 
 		beego.Run()
 	}
