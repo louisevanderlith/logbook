@@ -13,7 +13,6 @@ import (
 )
 
 func main() {
-	mode := os.Getenv("RUNMODE")
 	keyPath := os.Getenv("KEYPATH")
 	pubName := os.Getenv("PUBLICKEY")
 	host := os.Getenv("HOST")
@@ -25,7 +24,7 @@ func main() {
 	defer core.Shutdown()
 
 	// Register with router
-	srv := mango.NewService(mode, appName, pubPath, enums.APP)
+	srv := mango.NewService(appName, pubPath, enums.APP)
 
 	port := beego.AppConfig.String("httpport")
 	err := srv.Register(port)
