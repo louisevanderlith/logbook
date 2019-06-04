@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"os"
+	"path"
 
 	"github.com/astaxie/beego"
 	"github.com/louisevanderlith/logbook/core"
@@ -12,14 +13,18 @@ import (
 )
 
 func main() {
-	mode := os.Getenv("RUNMODE")
+	keyPath := os.Getenv("KEYPATH")
+	pubName := os.Getenv("PUBLICKEY")
+	host := os.Getenv("HOST")
+	pubPath := path.Join(keyPath, pubName)
+
 	appName := beego.BConfig.AppName
 
 	core.CreateContext()
 	defer core.Shutdown()
 
 	// Register with router
-	srv := mango.NewService(mode, appName, enums.APP)
+	srv := mango.NewService(appName, pubPath, enums.APP)
 
 	port := beego.AppConfig.String("httpport")
 	err := srv.Register(port)
@@ -27,14 +32,8 @@ func main() {
 	if err != nil {
 		log.Print("Register: ", err)
 	} else {
-		err = mango.UpdateTheme(srv.ID)
+		routers.Setup(srv, host)
 
-		if err != nil {
-			panic(err)
-		}
-		routers.Setup(srv)
-
-		beego.SetStaticPath("/dist", "dist")
 		beego.Run()
 	}
 }

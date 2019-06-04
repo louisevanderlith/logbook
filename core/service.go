@@ -5,10 +5,12 @@ import (
 )
 
 type Service struct {
-	DoneBy       string
-	Odometer     int64
+	UserKey    husk.Key
+	Odometer   int64
 	LicensePlate string
-	Items        ServiceItems
+	OilChange  bool
+	Inspection bool
+	Additional Additional
 }
 
 func (o Service) Valid() (bool, error) {
