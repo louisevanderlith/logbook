@@ -7,7 +7,7 @@ import (
 //History holds the entire history of a vehicle.
 type History struct {
 	VehicleKey husk.Key
-	Contact    ContactDetail
+	ClientKey  husk.Key
 	Services   []Service
 }
 

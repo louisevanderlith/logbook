@@ -1,28 +1,20 @@
 package controllers
 
 import (
-	"encoding/json"
 	"net/http"
 
+	"github.com/louisevanderlith/droxolite/xontrols"
 	"github.com/louisevanderlith/husk"
 	"github.com/louisevanderlith/logbook/core"
-	"github.com/louisevanderlith/mango/control"
 )
 
 type HistoryController struct {
-	control.APIController
-}
-
-func NewHistoryCtrl(ctrlmap *control.ControllerMap) *HistoryController {
-	result := &HistoryController{}
-	result.SetInstanceMap(ctrlmap)
-
-	return result
+	xontrols.APICtrl
 }
 
 // /v1/history/:vehicleKey
 func (req *HistoryController) GetByVehicle() {
-	vehKey := req.Ctx.Input.Param(":vehicleKey")
+	vehKey := req.FindParam("vehicleKey")
 
 	key, err := husk.ParseKey(vehKey)
 
@@ -44,7 +36,7 @@ func (req *HistoryController) GetByVehicle() {
 // /v1/history
 func (req *HistoryController) Post() {
 	var obj core.History
-	err := json.Unmarshal(req.Ctx.Input.RequestBody, &obj)
+	err := req.Body(&obj)
 
 	if err != nil {
 		req.Serve(http.StatusBadRequest, err, nil)

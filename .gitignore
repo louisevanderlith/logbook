@@ -13,5 +13,5 @@
 
 logbook
 
-db/
+db/*.husk
 !db/*.seed.json
