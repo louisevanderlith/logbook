@@ -10,8 +10,8 @@ func Setup(poxy *droxolite.Epoxy) {
 	//History
 	histCtrl := &controllers.HistoryController{}
 	histGroup := droxolite.NewRouteGroup("history", histCtrl)
-	histGroup.AddRoute("/", "POST", roletype.Owner, histCtrl.Post)
-	histGroup.AddRoute("/{vehicleKey:[0-9]+\x60[0-9]+}", "GET", roletype.User, histCtrl.GetByVehicle)
+	histGroup.AddRoute("Create Service History", "/", "POST", roletype.Owner, histCtrl.Post)
+	histGroup.AddRoute("History by Vehicle", "/{vehicleKey:[0-9]+\x60[0-9]+}", "GET", roletype.User, histCtrl.GetByVehicle)
 	poxy.AddGroup(histGroup)
 	/*ctrlmap := EnableFilter(s, host)
 
