@@ -3,51 +3,47 @@ package controllers
 import (
 	"net/http"
 
-	"github.com/louisevanderlith/droxolite/xontrols"
+	"github.com/louisevanderlith/droxolite/context"
 	"github.com/louisevanderlith/husk"
 	"github.com/louisevanderlith/logbook/core"
 )
 
 type HistoryController struct {
-	xontrols.APICtrl
 }
 
 // /v1/history/:vehicleKey
-func (req *HistoryController) GetByVehicle() {
-	vehKey := req.FindParam("vehicleKey")
+func (req *HistoryController) GetByVehicle(ctx context.Contexer) (int, interface{}) {
+	vehKey := ctx.FindParam("vehicleKey")
 
 	key, err := husk.ParseKey(vehKey)
 
 	if err != nil {
-		req.Serve(http.StatusBadRequest, err, nil)
-		return
+		return http.StatusBadRequest, err
 	}
 
 	rec, err := core.GetHistoryByVehicle(key)
 
 	if err != nil {
-		req.Serve(http.StatusNotFound, err, nil)
-		return
+		return http.StatusNotFound, err
 	}
 
-	req.Serve(http.StatusOK, nil, rec)
+	return http.StatusOK, rec
 }
 
 // /v1/history
-func (req *HistoryController) Post() {
+func (req *HistoryController) Post(ctx context.Contexer) (int, interface{}) {
 	var obj core.History
-	err := req.Body(&obj)
+	err := ctx.Body(&obj)
 
 	if err != nil {
-		req.Serve(http.StatusBadRequest, err, nil)
-		return
+		return http.StatusBadRequest, err
 	}
 
 	rec, err := obj.Create()
 
 	if err != nil {
-		req.Serve(http.StatusInternalServerError, err, nil)
+		return http.StatusInternalServerError, err
 	}
 
-	req.Serve(http.StatusOK, nil, rec)
+	return http.StatusOK, rec
 }
