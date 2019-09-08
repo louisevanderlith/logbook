@@ -8,12 +8,20 @@ import (
 	"github.com/louisevanderlith/logbook/core"
 )
 
-type HistoryController struct {
+type History struct {
+}
+
+func (x *History) Get(ctx context.Requester) (int, interface{}) {
+	return http.StatusMethodNotAllowed, nil
+}
+
+func (x *History) Search(ctx context.Requester) (int, interface{}) {
+	return http.StatusMethodNotAllowed, nil
 }
 
 // /v1/history/:vehicleKey
-func (req *HistoryController) GetByVehicle(ctx context.Contexer) (int, interface{}) {
-	vehKey := ctx.FindParam("vehicleKey")
+func (req *History) View(ctx context.Requester) (int, interface{}) {
+	vehKey := ctx.FindParam("key")
 
 	key, err := husk.ParseKey(vehKey)
 
@@ -31,7 +39,7 @@ func (req *HistoryController) GetByVehicle(ctx context.Contexer) (int, interface
 }
 
 // /v1/history
-func (req *HistoryController) Post(ctx context.Contexer) (int, interface{}) {
+func (req *History) Create(ctx context.Requester) (int, interface{}) {
 	var obj core.History
 	err := ctx.Body(&obj)
 
