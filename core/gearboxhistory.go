@@ -12,6 +12,6 @@ type GearboxHistory struct {
 	//Gearbox  *Gearbox
 }
 
-func (m GearboxHistory) Valid() (bool, error) {
+func (m GearboxHistory) Valid() error {
 	return husk.ValidateStruct(&m)
 }

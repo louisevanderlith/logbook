@@ -15,6 +15,6 @@ type Alteration struct {
 	Odometer    int64
 }
 
-func (m Alteration) Valid() (bool, error) {
+func (m Alteration) Valid() error {
 	return husk.ValidateStruct(&m)
 }

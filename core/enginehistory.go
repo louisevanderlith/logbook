@@ -12,6 +12,6 @@ type EngineHistory struct {
 	//Engine   *Engine
 }
 
-func (m EngineHistory) Valid() (bool, error) {
+func (m EngineHistory) Valid() error {
 	return husk.ValidateStruct(&m)
 }

@@ -11,7 +11,7 @@ type History struct {
 	Services   []Service
 }
 
-func (p History) Valid() (bool, error) {
+func (p History) Valid() error {
 	return husk.ValidateStruct(&p)
 }
 

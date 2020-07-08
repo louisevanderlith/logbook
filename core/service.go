@@ -13,6 +13,6 @@ type Service struct {
 	Additional Additional
 }
 
-func (o Service) Valid() (bool, error) {
+func (o Service) Valid() error {
 	return husk.ValidateStruct(&o)
 }
