@@ -16,5 +16,5 @@ type Alteration struct {
 }
 
 func (m Alteration) Valid() error {
-	return husk.ValidateStruct(&m)
+	return husk.ValidateStruct(m)
 }

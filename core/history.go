@@ -12,7 +12,7 @@ type History struct {
 }
 
 func (p History) Valid() error {
-	return husk.ValidateStruct(&p)
+	return husk.ValidateStruct(p)
 }
 
 //GetHistoryByVehicle finds the history for a given vehicle key.

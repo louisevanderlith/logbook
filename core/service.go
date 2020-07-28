@@ -14,5 +14,5 @@ type Service struct {
 }
 
 func (o Service) Valid() error {
-	return husk.ValidateStruct(&o)
+	return husk.ValidateStruct(o)
 }

@@ -13,5 +13,5 @@ type GearboxHistory struct {
 }
 
 func (m GearboxHistory) Valid() error {
-	return husk.ValidateStruct(&m)
+	return husk.ValidateStruct(m)
 }

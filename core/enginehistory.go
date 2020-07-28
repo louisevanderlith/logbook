@@ -13,5 +13,5 @@ type EngineHistory struct {
 }
 
 func (m EngineHistory) Valid() error {
-	return husk.ValidateStruct(&m)
+	return husk.ValidateStruct(m)
 }
