@@ -1,19 +1,18 @@
 package handles
 
 import (
+	"github.com/louisevanderlith/droxolite/drx"
 	"github.com/louisevanderlith/droxolite/mix"
 	"log"
 	"net/http"
 
-	"github.com/louisevanderlith/droxolite/context"
 	"github.com/louisevanderlith/husk"
 	"github.com/louisevanderlith/logbook/core"
 )
 
 // /v1/history/:vehicleKey
 func ViewHistory(w http.ResponseWriter, r *http.Request) {
-	ctx := context.New(w, r)
-	vehKey := ctx.FindParam("key")
+	vehKey := drx.FindParam(r, "key")
 
 	key, err := husk.ParseKey(vehKey)
 
@@ -31,7 +30,7 @@ func ViewHistory(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	err = ctx.Serve(http.StatusOK, mix.JSON(rec))
+	err = mix.Write(w, mix.JSON(rec))
 
 	if err != nil {
 		log.Println("Serve Error", err)
@@ -40,9 +39,8 @@ func ViewHistory(w http.ResponseWriter, r *http.Request) {
 
 // /v1/history
 func CreateHistory(w http.ResponseWriter, r *http.Request) {
-	ctx := context.New(w, r)
 	var obj core.History
-	err := ctx.Body(&obj)
+	err := drx.JSONBody(r, &obj)
 
 	if err != nil {
 		log.Println("Bind Error", err)
@@ -58,7 +56,7 @@ func CreateHistory(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	err = ctx.Serve(http.StatusOK, mix.JSON(rec))
+	err = mix.Write(w, mix.JSON(rec))
 
 	if err != nil {
 		log.Println("Serve Error", err)

@@ -7,16 +7,16 @@ import (
 	"net/http"
 )
 
-func SetupRoutes(scrt, secureUrl string) http.Handler {
+func SetupRoutes(scrt, securityUrl, managerUrl string) http.Handler {
 	r := mux.NewRouter()
 
-	view := kong.ResourceMiddleware("logbook.history.view", scrt, secureUrl, ViewHistory)
+	view := kong.ResourceMiddleware(http.DefaultClient, "logbook.history.view", scrt, securityUrl, managerUrl, ViewHistory)
 	r.HandleFunc("/history/{key:[0-9]+\\x60[0-9]+}", view).Methods(http.MethodGet)
 
-	create := kong.ResourceMiddleware("logbook.history.create", scrt, secureUrl, CreateHistory)
+	create := kong.ResourceMiddleware(http.DefaultClient, "logbook.history.create", scrt, securityUrl, managerUrl, CreateHistory)
 	r.HandleFunc("/history", create).Methods(http.MethodPost)
 
-	lst, err := kong.Whitelist(http.DefaultClient, secureUrl, "logbook.history.view", scrt)
+	lst, err := kong.Whitelist(http.DefaultClient, securityUrl, "logbook.history.view", scrt)
 
 	if err != nil {
 		panic(err)

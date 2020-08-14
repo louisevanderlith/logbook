@@ -21,13 +21,17 @@ func GetHistoryByVehicle(vehicleKey husk.Key) (husk.Recorder, error) {
 }
 
 func (p History) Create() (husk.Recorder, error) {
-	rec := ctx.History.Create(p)
+	rec, err := ctx.History.Create(p)
 
-	if rec.Error != nil {
-		return nil, rec.Error
+	if err != nil {
+		return nil, err
 	}
 
-	ctx.History.Save()
+	err = ctx.History.Save()
 
-	return rec.Record, nil
+	if err != nil {
+		return nil, err
+	}
+
+	return rec, nil
 }
