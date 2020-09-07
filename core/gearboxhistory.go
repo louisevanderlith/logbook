@@ -1,9 +1,8 @@
 package core
 
 import (
+	"github.com/louisevanderlith/husk/validation"
 	"time"
-
-	"github.com/louisevanderlith/husk"
 )
 
 type GearboxHistory struct {
@@ -13,5 +12,5 @@ type GearboxHistory struct {
 }
 
 func (m GearboxHistory) Valid() error {
-	return husk.ValidateStruct(m)
+	return validation.Struct(m)
 }

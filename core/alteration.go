@@ -1,9 +1,9 @@
 package core
 
 import (
+	"github.com/louisevanderlith/husk/validation"
 	"time"
 
-	"github.com/louisevanderlith/husk"
 	"github.com/louisevanderlith/logbook/core/alterationtype"
 )
 
@@ -16,5 +16,5 @@ type Alteration struct {
 }
 
 func (m Alteration) Valid() error {
-	return husk.ValidateStruct(m)
+	return validation.Struct(m)
 }

@@ -1,11 +1,12 @@
 package core
 
 import (
-	"github.com/louisevanderlith/husk"
+	"github.com/louisevanderlith/husk/hsk"
+	"github.com/louisevanderlith/husk/validation"
 )
 
 type Service struct {
-	UserKey    husk.Key
+	UserKey    hsk.Key
 	Odometer   int64
 	LicensePlate string
 	OilChange  bool
@@ -14,5 +15,5 @@ type Service struct {
 }
 
 func (o Service) Valid() error {
-	return husk.ValidateStruct(o)
+	return validation.Struct(o)
 }

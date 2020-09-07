@@ -3,10 +3,10 @@ package handles
 import (
 	"github.com/louisevanderlith/droxolite/drx"
 	"github.com/louisevanderlith/droxolite/mix"
+	"github.com/louisevanderlith/husk/keys"
 	"log"
 	"net/http"
 
-	"github.com/louisevanderlith/husk"
 	"github.com/louisevanderlith/logbook/core"
 )
 
@@ -14,7 +14,7 @@ import (
 func ViewHistory(w http.ResponseWriter, r *http.Request) {
 	vehKey := drx.FindParam(r, "key")
 
-	key, err := husk.ParseKey(vehKey)
+	key, err := keys.ParseKey(vehKey)
 
 	if err != nil {
 		log.Println(err)

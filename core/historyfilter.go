@@ -1,15 +1,17 @@
 package core
 
-import "github.com/louisevanderlith/husk"
+import (
+	"github.com/louisevanderlith/husk/hsk"
+)
 
-type historyFilter func(obj *History) bool
+type historyFilter func(obj History) bool
 
-func (f historyFilter) Filter(obj husk.Dataer) bool {
-	return f(obj.(*History))
+func (f historyFilter) Filter(obj hsk.Record) bool {
+	return f(obj.Data().(History))
 }
 
-func byVehicleKey(key husk.Key) historyFilter {
-	return func(obj *History) bool {
+func byVehicleKey(key hsk.Key) historyFilter {
+	return func(obj History) bool {
 		return obj.VehicleKey == key
 	}
 }
