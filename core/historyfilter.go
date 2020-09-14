@@ -7,7 +7,7 @@ import (
 type historyFilter func(obj History) bool
 
 func (f historyFilter) Filter(obj hsk.Record) bool {
-	return f(obj.Data().(History))
+	return f(obj.GetValue().(History))
 }
 
 func byVehicleKey(key hsk.Key) historyFilter {
