@@ -2,28 +2,25 @@ package handles
 
 import (
 	"github.com/gorilla/mux"
-	"github.com/louisevanderlith/kong/middle"
+	"github.com/louisevanderlith/droxolite/open"
 	"github.com/rs/cors"
 	"net/http"
 )
 
-func SetupRoutes(scrt, securityUrl, managerUrl string) http.Handler {
+func SetupRoutes(issuer, audience string) http.Handler {
 	r := mux.NewRouter()
-	ins := middle.NewResourceInspector(http.DefaultClient, securityUrl, managerUrl)
-	view := ins.Middleware("logbook.history.view", scrt, ViewHistory)
-	r.HandleFunc("/history/{key:[0-9]+\\x60[0-9]+}", view).Methods(http.MethodGet)
+	mw := open.BearerMiddleware(audience, issuer)
+	r.Handle("/history/{key:[0-9]+\\x60[0-9]+}", mw.Handler(http.HandlerFunc(ViewHistory))).Methods(http.MethodGet)
+	r.Handle("/history", mw.Handler(http.HandlerFunc(CreateHistory))).Methods(http.MethodPost)
 
-	create := ins.Middleware("logbook.history.create", scrt, CreateHistory)
-	r.HandleFunc("/history", create).Methods(http.MethodPost)
+	//lst, err := middle.Whitelist(http.DefaultClient, securityUrl, "logbook.history.view", scrt)
 
-	lst, err := middle.Whitelist(http.DefaultClient, securityUrl, "logbook.history.view", scrt)
-
-	if err != nil {
-		panic(err)
-	}
+	//if err != nil {
+	//	panic(err)
+	//}
 
 	corsOpts := cors.New(cors.Options{
-		AllowedOrigins: lst,
+		AllowedOrigins: []string{"*"},
 		AllowedMethods: []string{
 			http.MethodGet,
 			http.MethodPost,
